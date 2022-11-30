@@ -1,0 +1,45 @@
+version: "3.7"
+
+services:
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+    tty: true
+    volumes:
+      - type: bind
+        source: ./backend
+        target: /api
+    ports:
+      - "8000:8000"
+    
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/frontend/Dockerfile
+    tty: true
+    volumes:
+      - type: bind
+        source: ./frontend
+        target: /app
+    ports:
+      - "3000:3000"
+    
+  mydb:
+    image: mysql:5.7
+    container_name: mysqldb
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./db/dev:/docker-entrypoint-initdb.d
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password # 任意のPWを設定する
+      # MYSQL_ROOT_PASSWORDは今回設定していないが必要に応じて設定する。
+      # .env の接続情報も編集すること
+    ports:
+      - '3306:3306'
