@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Component from "@/components/login-btn"
 
 const Home: NextPage = () => {
   return (
@@ -36,6 +37,8 @@ const Home: NextPage = () => {
                 to deploy it.
               </div>
             </Link>
+            <div className="text-white">
+            <Component /></div>
           </div>
         </div>
       </main>
