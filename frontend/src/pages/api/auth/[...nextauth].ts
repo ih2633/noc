@@ -3,6 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import { env } from "../../../env/server.mjs";
 
 export const authOptions: NextAuthOptions = {
+  secret: env.NEXTAUTH_SECRET,
   providers: [
     GithubProvider({
       clientId: env.GITHUB_CLIENT_ID,
