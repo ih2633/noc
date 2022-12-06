@@ -56,7 +56,7 @@ export const PostIndexPageDocument = gql`
     publishDate
   }
 }
-    `;
+`;
 
 export function usePostIndexPageQuery(options?: Omit<Urql.UseQueryArgs<PostIndexPageQueryVariables>, 'query'>) {
   return Urql.useQuery<PostIndexPageQuery, PostIndexPageQueryVariables>({ query: PostIndexPageDocument, ...options });
